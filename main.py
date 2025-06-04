@@ -33,7 +33,7 @@ try:
     else:
 
         # zum debugggen mal eine tabelle mit allen infos drucken
-        # st.dataframe(stock_info)
+        st.dataframe(stock_info)
         
         # Grundlegende Informationen anzeigen
         st.subheader(f"Informationen zu {stock_info.get('shortName', ticker_symbol)}") # Zeige Kurznamen, falls verfügbar
