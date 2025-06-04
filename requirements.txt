@@ -1,2 +1,3 @@
-ytfinance
 streamlit
+yfinance
+pandas
