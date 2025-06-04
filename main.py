@@ -32,8 +32,9 @@ try:
          st.error(f"Fehler: Konnte keine Daten für Ticker '{ticker_symbol}' abrufen. Vielleicht ist der Ticker ungültig?")
     else:
 
-        # zum debugggen mal eine tabelle mit allen infos drucken
-        st.dataframe(stock_info)
+        with st.expander("See ticker details:"):
+            # zum debugggen mal eine tabelle mit allen infos drucken
+            st.dataframe(stock_info)
         
         # Grundlegende Informationen anzeigen
         st.subheader(f"Informationen zu {stock_info.get('shortName', ticker_symbol)}") # Zeige Kurznamen, falls verfügbar
