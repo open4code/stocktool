@@ -55,8 +55,8 @@ def process_excel_data(file_path):
         selected_mid_returns = returns[mid_stocks]
 
         # Optional: Debugging-Ausgabe, um Spalten und Daten zu überprüfen
-        # st.write(f"Ausgewählte Bot-Spalten: {selected_bot_returns.columns.tolist()}")
-        # st.write(f"Beispiel Bot-Renditen:\n{selected_bot_returns.head()}")
+        st.write(f"Ausgewählte Bot-Spalten: {selected_bot_returns.columns.tolist()}")
+        st.write(f"Beispiel Bot-Renditen:\n{selected_bot_returns.head()}")
 
         # Konvertieren Sie die ausgewählten Daten explizit zu numerischen Werten (falls nicht bereits geschehen)
         # Dies ist eine wichtige Fehlerquelle: Sicherstellen, dass es sich um Zahlen handelt
