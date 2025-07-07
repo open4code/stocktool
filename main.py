@@ -50,9 +50,30 @@ def process_excel_data(file_path):
         returns.columns = returns.columns.astype(str).str.replace(r'\s+', ' ', regex=True).str.strip()
 
         # Portfoliowerte berechnen
-        botval = (returns[bot_stocks] / 100 + 1).cumprod().mean(axis=1) * previous_bot_val_last
-        topval = (returns[top_stocks] / 100 + 1).cumprod().mean(axis=1) * previous_top_val_last
-        midval = (returns[mid_stocks] / 100 + 1).cumprod().mean(axis=1) * previous_mid_val_last
+        selected_bot_returns = returns[bot_stocks]
+        selected_top_returns = returns[top_stocks]
+        selected_mid_returns = returns[mid_stocks]
+
+        # Optional: Debugging-Ausgabe, um Spalten und Daten zu überprüfen
+        # st.write(f"Ausgewählte Bot-Spalten: {selected_bot_returns.columns.tolist()}")
+        # st.write(f"Beispiel Bot-Renditen:\n{selected_bot_returns.head()}")
+
+        # Konvertieren Sie die ausgewählten Daten explizit zu numerischen Werten (falls nicht bereits geschehen)
+        # Dies ist eine wichtige Fehlerquelle: Sicherstellen, dass es sich um Zahlen handelt
+        selected_bot_returns = selected_bot_returns.apply(pd.to_numeric, errors='coerce')
+        selected_top_returns = selected_top_returns.apply(pd.to_numeric, errors='coerce')
+        selected_mid_returns = selected_mid_returns.apply(pd.to_numeric, errors='coerce')
+
+        # Füllen Sie NaN-Werte, wenn nötig, um Fehler bei Berechnungen zu vermeiden.
+        # Eine Option wäre 0 oder der Mittelwert/Median, je nach Datenlage.
+        # Für Renditen ist 0 oft eine sichere Wahl, damit cumprod nicht unterbrochen wird.
+        selected_bot_returns = selected_bot_returns.fillna(0)
+        selected_top_returns = selected_top_returns.fillna(0)
+        selected_mid_returns = selected_mid_returns.fillna(0)
+
+        botval = (selected_bot_returns / 100 + 1).cumprod().mean(axis=1) * previous_bot_val_last
+        topval = (selected_top_returns / 100 + 1).cumprod().mean(axis=1) * previous_top_val_last
+        midval = (selected_mid_returns / 100 + 1).cumprod().mean(axis=1) * previous_mid_val_last
 
         all_top_vals.append(topval)
         all_mid_vals.append(midval)
