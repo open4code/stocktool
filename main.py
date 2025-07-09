@@ -45,7 +45,7 @@ r9 = 3321
 sheet1 = pd.read_excel(file_path, sheet_name=0, header=None)
 sheet2 = pd.read_excel(file_path, sheet_name=1, header=None)
 
-stock_names = sheet1.iloc[3:3, 3:53].tolist()
+stock_names = sheet1.iloc[3, 3:10].tolist()
 st.write(f" stock_names: {stock_names} ")
 
 stock_names = pd.Series(stock_names).astype(str).str.replace(r'\s+', ' ', regex=True).str.strip()
