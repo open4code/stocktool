@@ -39,7 +39,7 @@ r7 = 2590
 r8 = 2955
 r9 = 3321
 
-rebalancing_rows = [33, 399, 765, 1129, 1494, 1860, 2225, 2590, 2955, 3321]
+#rebalancing_rows = [33, 399, 765, 1129, 1494, 1860, 2225, 2590, 2955, 3321]
 
 # === Daten laden ===
 sheet1 = pd.read_excel(file_path, sheet_name=0, header=None)
@@ -55,11 +55,16 @@ top0 = ratings0.nsmallest(20).index.tolist()
 mid0 = ratings0.sort_values().iloc[15:35].index.tolist()
 bot0 = ratings0.nlargest(20).index.tolist()
 
+#st.success("Datei erfolgreich hochgeladen!")
+st.write(f" bot0: {bot0} ")
+
 returns0 = sheet2.iloc[r0+1:r1+1, 0:51].copy()
 returns0.columns = ['Date'] + stock_names.tolist()
 returns0['Date'] = pd.to_datetime(returns0['Date'], errors='coerce')
 returns0.set_index('Date', inplace=True)
 returns0.columns = returns0.columns.astype(str).str.replace(r'\s+', ' ', regex=True).str.strip()
+
+st.write(f" returns0[bot0]: {returns0[bot0]} ")
 
 botval0 = (returns0[bot0] / 100 + 1).cumprod().mean(axis=1) * 100
 topval0 = (returns0[top0] / 100 + 1).cumprod().mean(axis=1) * 100
