@@ -14,7 +14,7 @@ Laden Sie Ihre Excel-Datei hoch, um die Wertentwicklung von Top 20, mittleren un
 
 file_path = st.file_uploader("Wählen Sie eine Excel-Datei aus", type=["xlsx", "xls"])
 
-if uploaded_file is not None:
+if file_path is not None:
     st.success("Datei erfolgreich hochgeladen!")
 
 st.markdown(
