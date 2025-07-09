@@ -46,10 +46,10 @@ sheet1 = pd.read_excel(file_path, sheet_name=0, header=None)
 sheet2 = pd.read_excel(file_path, sheet_name=1, header=None)
 
 stock_names = sheet1.iloc[0, 1:51].tolist()
-st.write(f" stock_names: {stock_names} ")
+#st.write(f" stock_names: {stock_names} ")
 
 stock_names = pd.Series(stock_names).astype(str).str.replace(r'\s+', ' ', regex=True).str.strip()
-st.write(f" stock_names2: {stock_names} ")
+#st.write(f" stock_names2: {stock_names} ")
 
 # === Block 1 ===
 ratings0 = pd.Series(sheet1.iloc[r0, 1:51].values, index=stock_names)
