@@ -46,7 +46,10 @@ sheet1 = pd.read_excel(file_path, sheet_name=0, header=None)
 sheet2 = pd.read_excel(file_path, sheet_name=1, header=None)
 
 stock_names = sheet1.iloc[0, 1:51].tolist()
+st.write(f" stock_names: {stock_names} ")
+
 stock_names = pd.Series(stock_names).astype(str).str.replace(r'\s+', ' ', regex=True).str.strip()
+st.write(f" stock_names2: {stock_names} ")
 
 # === Block 1 ===
 ratings0 = pd.Series(sheet1.iloc[r0, 1:51].values, index=stock_names)
@@ -56,7 +59,7 @@ mid0 = ratings0.sort_values().iloc[15:35].index.tolist()
 bot0 = ratings0.nlargest(20).index.tolist()
 
 #st.success("Datei erfolgreich hochgeladen!")
-st.write(f" bot0: {bot0} ")
+#st.write(f" bot0: {bot0} ")
 
 returns0 = sheet2.iloc[r0+1:r1+1, 0:51].copy()
 returns0.columns = ['Date'] + stock_names.tolist()
